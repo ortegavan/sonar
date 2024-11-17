@@ -2,51 +2,51 @@
 
 ### Setup
 
-1. Instalar o JDK mais recente de https://www.oracle.com/cis/java/technologies/downloads/ 
+1. Instale o JDK mais recente de https://www.oracle.com/cis/java/technologies/downloads/ 
 
-2. Baixar o SonarScanner de https://docs.sonarsource.com/sonarqube/9.9/analyzing-source-code/scanners/sonarscanner/
+2. Baixe o SonarScanner de https://docs.sonarsource.com/sonarqube/9.9/analyzing-source-code/scanners/sonarscanner/
 
-3. Ajustar o PATH do macOS para incluir o SonarScanner:
+3. Ajuste o PATH do macOS para incluir o SonarScanner:
 
-	1. Editar o arquivo de configuração do zsh:
+	1. Edite o arquivo de configuração do zsh:
 
 		```bash
 		nano ~/.zshrc
 		```
 
-	 2. Adicionar o caminho do `bin`  do SonarScanner com a linha:
+	 2. Adicione o caminho do `bin`  do SonarScanner com a linha:
 
 		```bash
 		export PATH="/Users/seu_usuario/Downloads/sonar-scanner-<versão>/bin:$PATH"
 		```
 
-		Salvar o arquivo: `CTRL + O`
+		Salve o arquivo: `CTRL + O`
 
-		Sair do arquivo: `CTRL+ X`
+		Saia do arquivo: `CTRL+ X`
 
-		3. Atualizar o terminal:
+		3. Atualize o terminal:
 
 		```bash
 		source ~/.zshrc
 		```
 
-		4. Verificar a instalação:
+		4. Verifique a instalação:
 
 		```bash
 		sonar-scanner --version
 		```
 
-4. Permitir a execução do Java (se ele foi bloqueado) em Preferências do Sistema > Segurança e Privacidade.
+4. Permita a execução do Java (se ele foi bloqueado) em Preferências do Sistema > Segurança e Privacidade.
 
-### Configuração do projeto
+### Configurando o projeto
 
-1. Adicionar o SonarScanner ao projeto:
+1. Adicione o SonarScanner ao projeto:
 
 	```bash
 	npm install --save-dev sonar-scanner
 	```
 
-2. Adicionar um script no `package.json`:
+2. Adicione um script no `package.json`:
 
 	```json
 	"scripts": {
@@ -54,7 +54,7 @@
 	}
 	```
 
-3. Criar o arquivo de configuração na raiz do projeto:
+3. Crie o arquivo de configuração na raiz do projeto (neste exemplo usando Sonar cloud):
 
 	```bash
 	touch sonar-project.properties
@@ -73,7 +73,29 @@
 	sonar.token=[seu token]
 	```
 
-4. Executar o SonarScanner:
+4. Execute o SonarScanner:
+
+	```bash
+	npm run sonar
+	```
+
+### Usando SonarQube localmente
+
+1.  Instale o Docker Desktop se não tiver. No terminal, execute:
+
+	```bash
+	docker run -d --name sonarqube -p 9000:9000 sonarqube
+	```
+
+2. Acesse http://localhost:9000 com usuário e senha `admin` (será solicitado trocar no primeiro acesso) e crie o projeto local;
+
+3. Altere o token no arquivo `sonar-project.properties`, remova a linha de `organization` e altere a url para:
+
+	```properties
+	sonar.host.url=http://localhost:9000
+	```
+
+4. Execute o SonarScanner:
 
 	```bash
 	npm run sonar

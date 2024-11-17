@@ -61,9 +61,9 @@
 	```
 
 	```properties
-	sonar.organization=ortegavan
-	sonar.projectKey=ortegavan_recipes
-	sonar.projectName=recipes
+	sonar.organization=[sua organization]
+	sonar.projectKey=[sua project key]
+	sonar.projectName=[seu projeto]
 	sonar.projectVersion=1.0
 	sonar.language=ts
 	sonar.sources=src
